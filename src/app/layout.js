@@ -1,15 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 export const metadata = {
   title: "Create Next App",
@@ -18,11 +10,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body lang="fa" className="flex flex-wrap w-full h-full">
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <Navbar />
+          <main className="flex w-full pt-[60px] md:pt-[70px]">{children}</main>
+          <Footer />
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
